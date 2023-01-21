@@ -4,6 +4,9 @@ const bannerHeight = bannerDiv.offsetHeight;
 const viewportHeight = window.innerHeight;
 const sketchHeight = viewportHeight - bannerHeight;
 
+const refreshButton = document.querySelector('.btn-refresh');
+refreshButton.addEventListener('click', refreshGrid);
+
 function createGrid(gridSize = 16){
 
     // determine grid item dimensions
@@ -21,7 +24,8 @@ function createGrid(gridSize = 16){
 
     for (let i = 0; i < gridSize ** 2; i++){
         let item = document.createElement('div');
-        item.style.backgroundColor = getRandomRGB();
+        // item.style.backgroundColor = getRandomRGB();
+        item.addEventListener('mouseover', (event) => {alterBackgroundColour(event.target)});
         sketchContainer.appendChild(item);
     }
 };
@@ -34,4 +38,34 @@ function getRandomRGB(){
     return `rgb(${r},${g},${b})`;
 };
 
+function alterBackgroundColour(targetDiv){
+    targetDiv.style.backgroundColor = '#000';
+};
+
 createGrid();
+
+function refreshGrid(){
+    let valid = false;
+    let gridSize = 0;
+
+    while (!valid){
+        gridSize = +prompt('Enter grid size. (max 100)', '16');
+        
+        if (gridSize === NaN || Number.isInteger(gridSize)){
+            valid = true;
+        } else {
+            valid = false;
+        }
+    }
+
+    if (gridSize === NaN){
+        return;
+    } else if (gridSize <= 0){
+        createGrid(1);
+    } else if (gridSize > 100){
+        createGrid(100);
+    } else {
+        createGrid(gridSize);
+    }
+
+};
