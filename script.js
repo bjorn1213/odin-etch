@@ -51,16 +51,17 @@ function refreshGrid(){
     while (!valid){
         gridSize = +prompt('Enter grid size. (max 100)', '16');
         
-        if (gridSize === NaN || Number.isInteger(gridSize)){
+        if (Number.isInteger(gridSize)){
             valid = true;
         } else {
             valid = false;
         }
     }
 
-    if (gridSize === NaN){
+    console.log(gridSize);
+    if (gridSize === 0){
         return;
-    } else if (gridSize <= 0){
+    } else if (gridSize < 0){
         createGrid(1);
     } else if (gridSize > 100){
         createGrid(100);
