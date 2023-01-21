@@ -1,0 +1,10 @@
+
+.banner {
+    background-color: rgb(59, 153, 230);
+    color: #fff;
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    padding: 5px 0;
+}
