@@ -24,7 +24,7 @@ function createGrid(gridSize = 16){
 
     for (let i = 0; i < gridSize ** 2; i++){
         let item = document.createElement('div');
-        // item.style.backgroundColor = getRandomRGB();
+        item.style.backgroundColor = 'rgb(255, 255, 255)';
         item.addEventListener('mouseover', (event) => {alterBackgroundColour(event.target)});
         sketchContainer.appendChild(item);
     }
@@ -39,10 +39,16 @@ function getRandomRGB(){
 };
 
 function alterBackgroundColour(targetDiv){
-    targetDiv.style.backgroundColor = '#000';
+    if (targetDiv.style.backgroundColor === 'rgb(255, 255, 255)'){
+        targetDiv.style.backgroundColor = getRandomRGB();
+    } else {
+        const rgb = targetDiv.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
+        const r = Math.max(rgb[0] - 25, 0);
+        const g = Math.max(rgb[1] - 25, 0);
+        const b = Math.max(rgb[2] - 25, 0);
+        targetDiv.style.backgroundColor = `rgb(${r},${g},${b})`;
+    }
 };
-
-createGrid();
 
 function refreshGrid(){
     let valid = false;
@@ -70,3 +76,5 @@ function refreshGrid(){
     }
 
 };
+
+createGrid();
